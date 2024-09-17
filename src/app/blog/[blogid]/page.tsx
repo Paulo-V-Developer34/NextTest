@@ -1,7 +1,29 @@
-export default function Blog({params}:any) {
+import prisma from "@/lib/db";
+
+interface blogparams {
+  params:{
+    blogid:string
+  }
+}
+
+export default async function Blog({params}:blogparams) {
+    const post = await prisma.post.findUnique({
+      where: {
+        slug: params.blogid,//esse na verdade é o slug
+      },
+      select: {
+        title: true,
+        content: true,
+        createdat: true,
+        updateat: true
+      }
+    })
     return (
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <h1>Blog número {params.blogid}</h1>
+      <div className="m-3 p-1 bg-slate-400 rounded gap-1">
+        <h1> {post?.title}</h1>
+        <p>{post?.content}</p>
+        <p>Data de publicação: {post?.createdat?.toLocaleDateString()}</p>
+        <p>Data de alteração: {post?.updateat?.toLocaleDateString()}</p>
       </div>
     );
   }  
