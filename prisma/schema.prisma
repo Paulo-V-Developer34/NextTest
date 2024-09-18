@@ -7,12 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model post {
+model Post {
   id        String   @id @default(cuid())
   title     String
   slug      String   @unique
   content   String?
   published Boolean  @default(false)
   updateat  DateTime @default(now())
-  createdat DateTime @default(now())
+  createdat DateTime @default(now()) @map("created_at")
+  User User @relation(fields: [userId], references: [id])//posso mudar para "autor", mas tanto faz
+  userId    String
+
+  @@index(slug)
+}
+
+model User {
+  id              String @id @default(cuid())
+  email           String @unique
+  hashedpassword  String
+  posts Post[]
 }
