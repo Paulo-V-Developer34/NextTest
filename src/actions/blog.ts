@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache"
 ////////////////////////////////
 export async function postar(formData:FormData) {
     try {
+        console.log("um post foi feito!")
     await prisma.post.create({
         data: {
             title: formData.get("title") as string,

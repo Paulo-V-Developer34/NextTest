@@ -8,6 +8,7 @@ const links = [
     {href:'/',name:'HOME'},
     {href:'/products',name:'Produtos'},
     {href:'/blog',name:'Blogs'},
+    {href:'/login',name:'Login'}
   ]
 
 export default function BarraNav(){
