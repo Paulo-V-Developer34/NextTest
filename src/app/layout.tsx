@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import BarraNav from "./BarraNav";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,6 +41,8 @@ export default function RootLayout({
         </header>
         <main>
           {children}
+          {/* precisei colocar o toaster aqui para que ele funcionasse */}
+          <Toaster position="top-right"/>
         </main>
         <footer className="bg-red-300">
           aqui temos o footer

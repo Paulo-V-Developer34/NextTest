@@ -1,6 +1,7 @@
 import { login } from "@/lib/session";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+// import { redirect, useRouter } from "next/navigation";
 
 interface input {
   input:string
@@ -13,13 +14,13 @@ interface dados {
   inputs:input[]
 }
 
-export default function Form(props:dados) {
-    const route = useRouter()
+export default async function Form(props:dados) {
+    // const route = useRouter()
 
   function gerarinputs(){
     return props.inputs.map((el,i)=>{
       return (
-        <div className="mb-4" key={el.input}>
+        <>
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={el.input}>
             {el.input}
           </label>
@@ -30,7 +31,7 @@ export default function Form(props:dados) {
             name={el.name}
             placeholder="Digite aqui"
           />
-        </div>
+        </>
       )
     })
   }
@@ -38,12 +39,7 @@ export default function Form(props:dados) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
       <h2 className="text-2xl font-bold mb-4">{props.titulo}</h2>
-      <form action={async (FormData)=>{
-        console.log("action acionado")
-        console.log(typeof(FormData))
-        login(FormData)//eu devo criar a função login no sistema de seção (sessão, cessão)
-        route.push('/')
-      }}>
+      <form action={login}>
           {
             gerarinputs()
           }
