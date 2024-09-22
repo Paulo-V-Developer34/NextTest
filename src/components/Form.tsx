@@ -39,7 +39,8 @@ export default async function Form(props:dados) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
       <h2 className="text-2xl font-bold mb-4">{props.titulo}</h2>
-      <form action={login}>
+      {/* <form action={login}> */}
+      <form>
           {
             gerarinputs()
           }

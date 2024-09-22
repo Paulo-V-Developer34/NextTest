@@ -1,7 +1,13 @@
 'use client'
 
+import { login } from "@/lib/session"
 import toast, { Toaster } from "react-hot-toast"
 import { z } from "zod"
+
+interface login {
+    nome:string,
+    senha:string
+}
 
 const contatype = z.object({
     nome: z.string().min(10,{message:"Seu nome deve ter no mínimo 10 dígitos"}).max(60,{message:"Seu nome deve ter no máximo 60 dígitos"}),
@@ -12,9 +18,12 @@ export default function FormLogin() {
 
 
     const enviarform = async (formData:FormData)=>{
-        const conta = {
-            nome: formData.get("nome"),
-            senha: formData.get("senha")
+        const nome = formData.get("nome") as string
+        const senha = formData.get("senha") as string
+
+        const conta:login = {
+            nome: nome !== null ? nome : "",
+            senha: senha !== null ? senha : ""
         }
 
         const result = contatype.safeParse(conta)//posso utilizar apenas parse, entretanto a forma com a qual ele lidará com os erros será diferente
@@ -29,10 +38,11 @@ export default function FormLogin() {
             })
 
             toast.error(errormessage)
-            return
+            return null
         }
 
-        //ainda preciso chamar a função da lib
+        //caso a operação não dê erro ele irá ver se os dados estão corretos e criará a sessão
+        login(conta)
     }
 
     return (
@@ -55,6 +65,7 @@ export default function FormLogin() {
             type='text'
             name='senha'
             placeholder="Digite aqui"/>
+        <button type="submit">Enviar</button>
     </form>
     )
     
