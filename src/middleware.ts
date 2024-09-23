@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+    //comandos aleatórios para testar o middleware
     if(request.nextUrl.pathname === "/test") {
         // return NextResponse.rewrite(new URL("/",request.url)) //Aqui eu consigo redirecionar o usuário para outra rota sem ter que modificar o URL
         return NextResponse.redirect(new URL("/",request.url))
@@ -18,7 +19,8 @@ export function middleware(request: NextRequest) {
     
     response.headers.set("custom-header","custom-value")//não sei para que serve este header
 
-    return response
+    //comando específico para atualizar a sessão
+    return await updateSession(request)
 }
 
 // export function middleware(request: NextRequest) {
