@@ -34,7 +34,7 @@ export default function FormLogin() {
             let errormessage = ""
 
             result.error.issues.forEach((issue)=>{
-                errormessage = errormessage + issue.path[0] + ": " + issue.message + ". "
+                errormessage = errormessage + issue.path[0] + ": " + issue.message + ". " //o biome me gera um erro aqui
             })
 
             toast.error(errormessage)
