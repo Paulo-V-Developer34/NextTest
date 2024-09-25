@@ -1,6 +1,7 @@
 "use server" //devemos utilizar isto para especificar que estamos utilizando um componente de servidor, mas isso é aplicável apenas para arquivos .ts
 
 import prisma from "@/lib/db"
+import { getCookies } from "@/lib/session"
 import { Prisma } from "@prisma/client"
 // import { connect } from "http2"
 import { revalidatePath } from "next/cache"
@@ -8,6 +9,10 @@ import { revalidatePath } from "next/cache"
 
 ////////////////////////////////
 export async function postar(formData:FormData) {
+    const user = await getCookies()
+    console.log("get cookies ativado")
+    console.log(user)
+    console.log(`Seu ID é ${user?.user.id}`)
     try {
         console.log("um post foi feito!")
     await prisma.post.create({
@@ -19,7 +24,7 @@ export async function postar(formData:FormData) {
             content: formData.get("content") as string,
             User: {
                 connect: {
-                    email: "paulo@gmail.com"
+                    email: user.user.gmail
                 }
             }
         }
