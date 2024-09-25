@@ -2,7 +2,7 @@
 
 import { jwtVerify, SignJWT } from "jose"
 import { cookies } from "next/headers"
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 import prisma from "./db"
 
 // import { publicEncrypt } from "crypto" //penso em utiliza-lo em versões futuras
