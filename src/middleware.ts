@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { updateSession } from "./lib/session";
+import { type NextRequest, NextResponse } from "next/server";
+import { getCookies, updateSession } from "./lib/session";
 
 export async function middleware(request: NextRequest) {
     // //comandos aleatórios para testar o middleware
@@ -19,7 +19,23 @@ export async function middleware(request: NextRequest) {
     //     response.headers.set("custom-header","custom-value")//não sei para que serve este header
     // }
     
-    
+    // console.log('middleware ativado')
+
+    // const cookies = await getCookies()
+    // console.log(cookies)
+
+    // //rota do usuário
+    // const url = request.nextUrl.clone()          ////POR ENQUANTO ESSE SISTEMA NÃO ESTÁ
+    // const rota = url.pathname
+
+
+
+    // if(!cookies && rota !== '/login') {
+    //     console.log('redirecionamento ativado')
+    //     console.log(cookies)
+    //     // return NextResponse.rewrite(new URL("/",request.url)) //Aqui eu consigo redirecionar o usuário para outra rota sem ter que modificar o URL
+    //     return NextResponse.redirect(new URL("/login",request.url))
+    // }
 
     //comando específico para atualizar a sessão
     return await updateSession(request)
