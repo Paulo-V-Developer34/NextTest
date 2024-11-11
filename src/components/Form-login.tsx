@@ -10,8 +10,8 @@ interface login {
 }
 
 const contatype = z.object({
-    nome: z.string().min(10,{message:"Seu nome deve ter no mínimo 10 dígitos"}).max(60,{message:"Seu nome deve ter no máximo 60 dígitos"}),
-    senha: z.string().min(8,{message:"sua senha deve ter no mínimo 8 dígitos"})
+    nome: z.string().min(5,{message:"Seu nome deve ter no mínimo 10 dígitos"}).max(60,{message:"Seu nome deve ter no máximo 60 dígitos"}),
+    senha: z.string().min(5,{message:"sua senha deve ter no mínimo 8 dígitos"})
 })
 
 export default function FormLogin() {
